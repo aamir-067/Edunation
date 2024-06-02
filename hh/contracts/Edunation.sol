@@ -59,7 +59,7 @@ contract Edunation {
 
 
     modifier _onlyOwner() {
-        require(msg.sender == owner, "only owner can with ehters");
+        require(msg.sender == owner, "only owner can withdraw ethers");
         _;
     }
 
