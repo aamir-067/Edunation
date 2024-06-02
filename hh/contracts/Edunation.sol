@@ -10,22 +10,24 @@ contract Edunation {
     struct Trx {
             trxType transectionType;
             string massage;
+            uint72 amount;
             address performer;
     }
 
     struct donor {
         string name;
         address account;
-        uint amount;
+        uint72 amount;
         string img;
     }
 
-    event trarnsection(address performer, trxType transectionType, uint amount);
+    event newTransection(address performer, trxType transectionType, uint amount);
 
 
-    Trx[10] transections;
-    donor topDonor;
-    address owner;
+    Trx[10] public transections;
+    uint8 private trxCount;
+    donor public topDonor;
+    address immutable private owner;
 
     constructor(address _owner) {
         owner = _owner;
@@ -34,18 +36,79 @@ contract Edunation {
 
 
 
-    function donate(string memory _name, string memory _img, uint _amount) public {
+    function donate(string memory _name, string memory _img, string memory _massage) public payable {
+        // check if the amount is greater then the top donation
+
+        require(msg.value >= 0.01 ether, "minimum amount to donate is 0.01 eth");
+
+        if(msg.value > topDonor.amount){
+            // make this donation a top donation
+            donor memory tempDonor = donor(_name, msg.sender, uint72(msg.value), _img);
+            topDonor = tempDonor;
+        }
+
+        // make a transection and save it.
+        addNewTransection(trxType.DEPOSIT, _massage, uint72(msg.value),msg.sender);
+
+        // increment the trxCount.
+        trxCount = trxCount < 10 ? trxCount + 1 : trxCount;
+
+        // emit event.
+        emit newTransection(msg.sender, trxType.DEPOSIT, msg.value);   
+    }
+
+
+    modifier _onlyOwner() {
+        require(msg.sender == owner, "only owner can with ehters");
+        _;
+    }
+
+    function withdraw(uint _amount, string memory _massage) public _onlyOwner {
+        require(_amount <= availabeBalance(), "not enough balance to withdraw");
+        // make a transection
+        addNewTransection(trxType.WITHDRAW, _massage, uint72(_amount) ,msg.sender);
+
+
+        // increment the trxCount.
+        trxCount = trxCount < 10 ? trxCount + 1 : trxCount;
         
+        // transferr the amount
+        payable(owner).transfer(_amount);
+
+        // emit event
+        emit newTransection(msg.sender, trxType.WITHDRAW, _amount);
     }
 
 
-    function withdraw(uint amount) public {
 
+    function availabeBalance() public view returns(uint){
+        return address(this).balance;
     }
 
 
-    function availabeBalance() public{}
+    function recentTransections() public view returns(Trx[10] memory){
+        return transections;
+    }
 
 
-    function addNewTransection() public {}
+
+    function addNewTransection(trxType _type, string memory _massage, uint72  _amount, address _performer) internal {
+        Trx memory tempTransection = Trx(_type, _massage, uint72(_amount),_performer);
+
+
+        // remove one old transection if the length of the transections array is equals to 10
+        if(trxCount == 10){
+            for(uint8 i = 1; i < 10; i++){
+                transections[i] = transections[i-1]; // shift all items to the left
+            }
+            // now add the new transection at the last index
+            transections[9] = tempTransection; // add the new item
+        }else{
+
+            
+            transections[trxCount] = tempTransection;
+        }
+    }
+
+
 }
