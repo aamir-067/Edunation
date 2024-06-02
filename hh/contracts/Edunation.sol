@@ -23,7 +23,6 @@ contract Edunation {
 
     event newTransection(address performer, trxType transectionType, uint amount);
 
-
     Trx[10] private transections;
     uint8 public trxCount;
     donor public topDonor;
@@ -32,8 +31,6 @@ contract Edunation {
     constructor(address _owner) {
         owner = _owner;
     }
-
-
 
 
     function donate(string memory _name, string memory _img, string memory _massage) public payable {
@@ -64,7 +61,7 @@ contract Edunation {
     }
 
     function withdraw(uint _amount, string memory _massage) public _onlyOwner {
-        require(_amount <= availabeBalance(), "not enough balance to withdraw");
+        require(_amount <= availableBalance(), "not enough balance to withdraw");
         // make a transection
         addNewTransection(trxType.WITHDRAW, _massage, uint72(_amount) ,msg.sender);
 
@@ -81,7 +78,7 @@ contract Edunation {
 
 
 
-    function availabeBalance() public view returns(uint){
+    function availableBalance() public view returns(uint){
         return address(this).balance;
     }
 

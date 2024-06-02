@@ -154,14 +154,14 @@ describe('Edunation', function () {
     describe('currentBalance', () => {
         it("initially should return zero balance", async () => {
 
-            expect(await edunation.availabeBalance()).to.equal(0n);
+            expect(await edunation.availableBalance()).to.equal(0n);
         });
 
         it("increases with donations", async () => {
 
             await edunation.connect(account02).donate("marry doe", "not available", "this is testing donation", { value: ethers.parseEther("0.2") });
 
-            expect(await edunation.availabeBalance()).to.equal(ethers.parseEther("0.2"));
+            expect(await edunation.availableBalance()).to.equal(ethers.parseEther("0.2"));
         });
 
         it("decrease with withdraws", async () => {
@@ -169,7 +169,7 @@ describe('Edunation', function () {
             await edunation.connect(account02).donate("marry doe", "not available", "this is testing donation", { value: ethers.parseEther("0.2") });
             await edunation.withdraw(ethers.parseEther("0.1"), "amount need for students books");
 
-            expect(await edunation.availabeBalance()).to.equal(ethers.parseEther("0.1"));
+            expect(await edunation.availableBalance()).to.equal(ethers.parseEther("0.1"));
 
         });
     })
