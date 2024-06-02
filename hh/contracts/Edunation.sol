@@ -24,10 +24,10 @@ contract Edunation {
     event newTransection(address performer, trxType transectionType, uint amount);
 
 
-    Trx[10] public transections;
-    uint8 private trxCount;
+    Trx[10] private transections;
+    uint8 public trxCount;
     donor public topDonor;
-    address immutable private owner;
+    address immutable public owner;
 
     constructor(address _owner) {
         owner = _owner;
@@ -86,7 +86,7 @@ contract Edunation {
     }
 
 
-    function recentTransections() public view returns(Trx[10] memory){
+    function recentTransactions() public view returns(Trx[10] memory){
         return transections;
     }
 

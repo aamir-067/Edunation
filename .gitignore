@@ -16,6 +16,7 @@ dist-ssr
 # hardhat 
 ignition
 artifacts
+cache
 
 # Editor directories and files
 .vscode/*
