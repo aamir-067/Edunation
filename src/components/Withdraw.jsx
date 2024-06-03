@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Withdraw = () => {
+export const Withdraw = () => {
     return (
         <div>Withdraw</div>
     )
 }
-
-export default Withdraw
