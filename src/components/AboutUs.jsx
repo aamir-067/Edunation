@@ -8,8 +8,8 @@ export const AboutUs = () => {
 				<h1 className="mt-8 max-w-4xl text-3xl font-bold tracking-tight text-black md:text-4xl lg:text-6xl">
 					About Us
 				</h1>
-				<section className="flex mt-10 justify-between h-96">
-					<div className="w-1/2 p-4">
+				<section className="md:flex mt-10 justify-between min-h-96">
+					<div className="md:w-1/2 p-4">
 						<p className="mb-4">
 							Lorem ipsum dolor sit amet consectetur adipisicing
 							elit. Eum illo, non quam velit corrupti quia quis.
@@ -32,7 +32,7 @@ export const AboutUs = () => {
 							similique!
 						</p>
 					</div>
-					<div className="w-1/2 bg-green-200">
+					<div className="md:w-1/2 bg-green-200">
 						<img
 							className="w-full h-full object-cover"
 							src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTc1fHx0ZWFtfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
@@ -47,9 +47,7 @@ export const AboutUs = () => {
 							Get to Know Our Staff
 						</h2>
 						<p className="mx-auto mt-4 max-w-2xl text-xl text-gray-600">
-							Lorem, ipsum dolor sit amet consectetur adipisicing
-							elit. Ullam reiciendis a vel error explicabo
-							voluptatum nihil possimus veritatis eos culpa.
+							Meet our Team, which helps kids educate which are not able to get a quality education from around the world
 						</p>
 					</div>
 

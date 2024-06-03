@@ -21,16 +21,16 @@ const Transactions = () => {
 							<thead className="">
 								<tr className="bg-gray-200 text-left font-bold">
 									<th className="whitespace-nowrap px-4 py-2 font-medium text-black">
-										Name
+										Address
 									</th>
 									<th className="whitespace-nowrap px-4 py-2 font-medium text-black">
-										Date of Birth
+										Massage
 									</th>
 									<th className="whitespace-nowrap px-4 py-2 font-medium text-black">
-										Role
+										Type
 									</th>
 									<th className="whitespace-nowrap px-4 py-2 font-medium text-black">
-										Salary
+										Amount
 									</th>
 								</tr>
 							</thead>
@@ -38,47 +38,43 @@ const Transactions = () => {
 							<tbody className="divide-y divide-gray-200">
 								<tr>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-900">
-										John Doe
+										0x42c234a9dca435
 									</td>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										24/05/1995
+										God bless everyone
 									</td>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										Web Developer
+										<p className="bg-green-600 text-white rounded-full text-sm px-2 w-fit">
+											deposit
+										</p>
 									</td>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										$120,000
-									</td>
-								</tr>
-
-								<tr>
-									<td className="whitespace-nowrap px-4 py-2  text-gray-900">
-										Jane Doe
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										04/11/1980
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										Web Designer
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										$100,000
+										0.05 eth
 									</td>
 								</tr>
 
 								<tr>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-900">
-										Gary Barlow
+										0x426969696969
 									</td>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										24/05/1995
+										All is well
 									</td>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										Singer
+										<p className="bg-red-600 rounded-full text-sm px-2 text-white w-fit">
+											withdraw
+										</p>
 									</td>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										$20,000
+										0.5 eth
 									</td>
+								</tr>
+
+								<tr>
+									<td className=" bg-red-200 text-center text-lg font-bold">
+										Total in charity
+									</td>
+									<td className="bg-green-200">1.2 eth</td>
 								</tr>
 							</tbody>
 						</table>

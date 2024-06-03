@@ -29,7 +29,7 @@ const NavBar = () => {
     return (
         <header className="relative w-full border-b bg-white pb-4">
             <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
-                <div className="inline-flex items-center space-x-2">
+                <NavLink to={"/"} className="inline-flex items-center space-x-2">
                     <span>
                         <svg
                             width="30"
@@ -45,7 +45,7 @@ const NavBar = () => {
                         </svg>
                     </span>
                     <span className="font-bold">EduNation</span>
-                </div>
+                </NavLink>
                 <div className="hidden lg:block">
                     <ul className="inline-flex space-x-8">
                         {menuItems.map((item) => (
@@ -53,7 +53,7 @@ const NavBar = () => {
                                 <NavLink
                                     to={item.href}
                                     className={({ isActive }) =>
-                                        `${isActive ? "font-bold text-lg" : "text-sm"
+                                        `${isActive ? "font-bold text-lg underline" : "text-sm"
                                         } font-semibold text-gray-800 hover:text-gray-900`
                                     }
                                 >

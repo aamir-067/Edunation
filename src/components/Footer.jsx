@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -20,41 +21,20 @@ const Footer = () => {
                                         fill="white"
                                     />
                                 </svg>
-                                <span className="ml-4 text-lg text-white font-bold">DevUI</span>
+                                <span className="ml-4 text-lg text-white font-bold">EduNation</span>
                             </div>
                         </a>
                     </div>
                     <div className="w-auto p-8">
-                        <ul className="-m-5 flex flex-wrap items-center">
-                            <li className="p-5">
-                                <a className="font-medium text-white hover:text-gray-200" href="#">
-                                    Privacy Policy
-                                </a>
-                            </li>
-                            <li className="p-5">
-                                <a className="font-medium text-white hover:text-gray-200" href="#">
-                                    Terms of Service
-                                </a>
-                            </li>
-                            <li className="p-5">
-                                <a className="font-medium text-white hover:text-gray-200" href="#">
-                                    Return Policy
-                                </a>
-                            </li>
-                            <li className="p-5">
-                                <a className="font-medium text-white hover:text-gray-200" href="#">
-                                    Contact Us
-                                </a>
-                            </li>
-                        </ul>
+                        <p className='text-white'>copyright &copy;2024. all rights reserved.</p>
                     </div>
                     <div className="w-auto p-8">
-                        <button
+                        <NavLink to={"donate"}
                             type="button"
                             className="rounded-md bg-white px-5 py-2 font-semibold text-black shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                         >
                             Donate
-                        </button>
+                        </NavLink>
                     </div>
                 </div>
             </div>
