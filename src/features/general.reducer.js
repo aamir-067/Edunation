@@ -7,15 +7,6 @@ const initialState = {
     ownerAddress: null
 }
 
-// export const setupWeb3 = createAsyncThunk('web3Api', async (web3Payload, thunkAPI) => {
-// your async calls here
-//     return {
-//         contract : web3payload.contract,
-//         provider: web3Payload.provider,
-//         signer: web3Payload.signer,
-//     };
-// });
-
 const generalReducer = createSlice({
     name: 'web3Api',
     initialState,

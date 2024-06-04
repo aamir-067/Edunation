@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menu, X } from 'lucide-react'
 import { NavLink } from "react-router-dom";
+import { connectWalletSigner } from '../interactions/helpers';
+import { store } from '../store/store';
+import { resetWeb3Api } from '../features/web3Api.reducer';
+import { useSelector } from "react-redux";
 const menuItems = [
     {
         name: 'Home',
@@ -22,10 +26,22 @@ const menuItems = [
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+    // const { signer } = store.getState().web3Api;
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen)
+    const { signer } = useSelector(state => state).web3Api;
+
+
+    const connectWallet = async () => {
+        if (signer) {
+            store.dispatch(resetWeb3Api());  // disconnect the wallet.
+        } else {
+            await connectWalletSigner();  // connect to wallet.
+        }
     }
+    const toggleMenu = () => {
+        setIsMenuOpen(prev => !prev);
+    }
+
     return (
         <header className="relative w-full border-b bg-white pb-4">
             <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
@@ -64,12 +80,13 @@ const NavBar = () => {
                         ))}
                     </ul>
                 </div>
-                <div className="hidden lg:block">
+                <div className="hidden lg:flex justify-center items-center gap-2">
+                    {signer && <p>{[...signer?.address].slice(0, 8).join("")}...</p>}
                     <button
-                        type="button"
+                        onClick={connectWallet}
                         className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     >
-                        {"connect wallet"}
+                        {signer ? "disconnect" : "connect wallet"}
                     </button>
                 </div>
                 <div className="lg:hidden">
@@ -125,10 +142,10 @@ const NavBar = () => {
                                     </nav>
                                 </div>
                                 <button
-                                    type="button"
+                                    onClick={connectWallet}
                                     className="mt-4 w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                                 >
-                                    Connect Wallet
+                                    {signer ? "disconnect" : "connect wallet"}
                                 </button>
                             </div>
                         </div>

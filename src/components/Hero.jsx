@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Transactions from './Transactions'
 import { NavLink } from 'react-router-dom'
+import { getAvailableBalance, getRecentTransactions, getTopDonation } from '../interactions/helpers'
 export function Hero() {
+
+    useEffect(() => {
+        (async () => {
+            await getTopDonation();
+            await getAvailableBalance();
+            await getRecentTransactions();
+        })();
+
+    }, []);
     return (
         <div className="relative w-full bg-white">
             <div className="mx-auto max-w-7xl lg:px-8">

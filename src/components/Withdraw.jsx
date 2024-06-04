@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getOwner } from "../interactions/helpers";
 
 export const Withdraw = () => {
+
+	useEffect(() => {
+		(async () => {
+			await getOwner();
+		})()
+	}, [])
+
 	return (
 		<div className="min-h-screen flex justify-center">
 			<div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">

@@ -37,7 +37,7 @@ export const Donate = () => {
 										type="number"
 										step={0.01}
 										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
-										placeholder="Enter donation amount*"
+										placeholder="Donation amount*"
 									/>
 								</div>
 							</div>
@@ -54,19 +54,18 @@ export const Donate = () => {
 										id="OrderNotes"
 										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md resize-none border-none align-top focus:ring-0 sm:text-sm"
 										rows="4"
-										placeholder="Enter any additional order notes..."
+										placeholder="Your massage..."
 									></textarea>
 								</div>
 							</div>
 
-							<div className="w-full flex justify-center">
-								<button
-									type="button"
-									className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-								>
-									{"Withdraw"}
-								</button>
-							</div>
+
+							<button
+								type="button"
+								className="rounded-md bg-black px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+							>
+								{"Donate"}
+							</button>
 						</form>
 					</div>
 

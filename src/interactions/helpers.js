@@ -3,6 +3,7 @@ import Edunation from "../artifacts/Edunation.json";
 import { ethers } from "ethers";
 import { store } from "../store/store";
 import { initWeb3 } from "../features/web3Api.reducer";
+import { setRecords } from "../features/general.reducer";
 export const connectWalletProvider = async () => {
     try {
         let provider;
@@ -22,7 +23,8 @@ export const connectWalletProvider = async () => {
         }
         const edunation = new ethers.Contract(edunationAddress, Edunation.abi, provider);
         store.dispatch(initWeb3({ provider, contract: edunation, signer: null }));
-        return { edunation, provider };
+        console.log(store.getState().web3Api);
+        return true;
     } catch (e) {
         console.error(e);
         return "something went wrong while connecting to metamask";
@@ -43,7 +45,8 @@ export const connectWalletSigner = async () => {
                 await connectWalletSigner();
             });
             store.dispatch(initWeb3({ provider, contract: edunation, signer }));
-            return { signer, edunation };
+            console.log(store.getState().web3Api.signer.address);
+            return true;
         } else {
             // "metamask is not installed"
             return undefined;
@@ -54,13 +57,18 @@ export const connectWalletSigner = async () => {
     }
 };
 
-
-
-export const getTopDonation = async ({ contract }) => {
+export const getTopDonation = async () => {
     try {
-
+        const { contract } = store.getState().web3Api;
+        if (!contract) {
+            console.log("error while getting topDonation. please refresh the page.");
+            return false;
+        }
         const topDonation = await contract.topDonor();
-        return topDonation;
+
+        const recentRecord = store.getState().general;
+        store.dispatch(setRecords({ ...recentRecord, topDonation }));
+        return true;
 
     } catch (error) {
         console.error("something went wrong while getting top donation", error);
@@ -68,20 +76,34 @@ export const getTopDonation = async ({ contract }) => {
 }
 
 
-export const getAvailableBalance = async ({ contract }) => {
+export const getAvailableBalance = async () => {
     try {
+        const { contract } = store.getState().web3Api;
+        if (!contract) {
+            console.log("error while getting availableBalance. please refresh the page.");
+            return false;
+        }
         const currentBalance = await contract.availableBalance();
-        return Number(ethers.formatEther(currentBalance));
+        const availBalance = ethers.formatEther(currentBalance);
+        store.dispatch(setRecords({ ...recentRecord, availBalance }));
+        return true;
+
     } catch (error) {
         console.error("error while getting the current available balance of the contract.", error);
         return new Error("error while getting the current available balance of the contract");
     }
 }
 
-export const getOwner = async ({ contract }) => {
+export const getOwner = async () => {
     try {
-        const owner = await contract.owner();
-        return owner;
+        const { contract } = store.getState().web3Api;
+        if (!contract) {
+            console.log("error while getting owner address. please refresh the page.");
+            return false;
+        }
+        const ownerAddress = await contract.owner();
+        store.dispatch(setRecords({ ...recentRecord, ownerAddress }));
+        return true;
     } catch (error) {
         console.error("error while getting the owner of the contract.", error);
         return new Error("error while getting the owner of the contract");

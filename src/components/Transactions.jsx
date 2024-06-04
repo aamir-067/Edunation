@@ -1,7 +1,14 @@
 import React from "react";
 import TopDonation from "./TopDonation";
+import { useSelector } from "react-redux";
+import { store } from "../store/store";
+import { ethers } from "ethers";
 
 const Transactions = () => {
+
+	const { availBalance, topDonation, transactions } = store.getState().general;
+
+
 	return (
 		<div className="w-full">
 			<div className="max-w-7xl mx-auto min-h-screen">
@@ -9,7 +16,7 @@ const Transactions = () => {
 					Meet Our Top Donator
 				</h1>
 				<div className="lg:w-6/12 md:w-8/12 w-11/12 mt-8  mx-auto">
-					<TopDonation />
+					<TopDonation donation={topDonation} />
 				</div>
 
 				<h1 className="mt-40 text-center text-3xl font-bold tracking-tight text-black md:text-4xl lg:text-5xl">
@@ -36,22 +43,28 @@ const Transactions = () => {
 							</thead>
 
 							<tbody className="divide-y divide-gray-200">
-								<tr>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-900">
-										0x42c234a9dca435
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										God bless everyone
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										<p className="bg-green-600 text-white rounded-full text-sm px-2 w-fit">
-											deposit
-										</p>
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										0.05 eth
-									</td>
-								</tr>
+								{
+									transactions && transactions.map((trx, index) => {
+										return (
+											<tr key={index}>
+												<td className="whitespace-nowrap px-4 py-2 text-gray-900">
+													{trx[3]}
+												</td>
+												<td className="whitespace-nowrap px-4 py-2 text-gray-700">
+													{trx[1]}
+												</td>
+												<td className="whitespace-nowrap px-4 py-2 text-gray-700">
+													<p className={`${ethers.toNumber(trx[0]) == 0 ? "bg-green-600" : "bg-red-600"} text-white rounded-full text-sm px-2 w-fit`}>
+														{ethers.toNumber(trx[0]) == 0 ? "deposit" : "withdraw"}
+													</p>
+												</td>
+												<td className="whitespace-nowrap px-4 py-2 text-gray-700">
+													{ethers.formatEther(trx[2])} eth
+												</td>
+											</tr>
+										)
+									})
+								}
 
 								<tr>
 									<td className="whitespace-nowrap px-4 py-2 text-gray-900">
@@ -80,7 +93,7 @@ const Transactions = () => {
 									</td>
 									<td className="hidden"></td>
 									<td className=" whitespace-nowrap text-lg font-bold">
-										1.2 eth
+										{availBalance ? availBalance : 0.00} eth
 									</td>
 								</tr>
 							</tbody>

@@ -23,8 +23,11 @@ const web3Api = createSlice({
             state.contract = action.payload.contract;
             state.signer = action.payload.signer;
             state.provider = action.payload.provider;
+        },
+        resetWeb3Api: (state) => {
+            state.signer = null
         }
     }
 })
-export const { initWeb3 } = web3Api.actions;
+export const { initWeb3, resetWeb3Api } = web3Api.actions;
 export default web3Api.reducer;
