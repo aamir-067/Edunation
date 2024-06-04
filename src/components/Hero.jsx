@@ -46,7 +46,7 @@ export function Hero() {
                 <div className="rounded-lg bg-gray-200 p-4">
                     <img
                         className="aspect-[3/2] w-full rounded-lg bg-gray-50 object-cover lg:aspect-auto lg:h-[400px]"
-                        src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTc1fHx0ZWFtfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+                        src="https://i.guim.co.uk/img/static/sys-images/Environment/Pix/pictures/2013/9/18/1379522585111/Indian-children-attend-a--008.jpg?width=465&dpr=1&s=none"
                         alt=""
                     />
                 </div>

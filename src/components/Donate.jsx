@@ -1,7 +1,85 @@
-import React from 'react'
+import React from "react";
 
 export const Donate = () => {
-    return (
-        <div>Donate</div>
-    )
-}
+	return (
+		<div className="relative w-full bg-white">
+			<div className="mx-auto max-w-7xl lg:px-8">
+				<section className="relative flex flex-wrap mb-10 lg:h-screen lg:items-center">
+					<div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
+						<div className="mx-auto max-w-lg text-center">
+							<h1 className="text-2xl font-bold sm:text-3xl">
+								Make Children Life Easy and Bright
+							</h1>
+
+							<p className="mt-4 text-gray-500">
+								Lorem ipsum dolor sit amet consectetur
+								adipisicing elit. Et libero nulla eaque error
+								neque ipsa culpa autem, at itaque nostrum!
+							</p>
+						</div>
+
+						<form
+							action="#"
+							className="mx-auto mb-0 mt-8 max-w-md space-y-4"
+						>
+							<div>
+								<div className="relative">
+									<input
+										type="text"
+										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
+										placeholder="Your Name*"
+									/>
+								</div>
+							</div>
+
+							<div>
+								<div className="relative">
+									<input
+										type="number"
+										step={0.01}
+										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
+										placeholder="Enter donation amount*"
+									/>
+								</div>
+							</div>
+
+							<input
+								class="block w-full text-lg border cursor-pointer shadow-md focus:outline-none"
+								id="large_size"
+								type="file"
+							/>
+
+							<div>
+								<div className="relative">
+									<textarea
+										id="OrderNotes"
+										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md resize-none border-none align-top focus:ring-0 sm:text-sm"
+										rows="4"
+										placeholder="Enter any additional order notes..."
+									></textarea>
+								</div>
+							</div>
+
+							<div className="w-full flex justify-center">
+								<button
+									type="button"
+									className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+								>
+									{"Withdraw"}
+								</button>
+							</div>
+						</form>
+					</div>
+
+					<div className="relative h-64 w-11/12 mx-auto md:h-96 lg:h-full lg:w-1/2">
+						<img
+							alt=""
+							src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+							className="absolute inset-0 h-full w-full object-cover"
+						/>
+					</div>
+				</section>
+			</div>
+		</div>
+	);
+};

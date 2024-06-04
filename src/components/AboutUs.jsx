@@ -35,7 +35,7 @@ export const AboutUs = () => {
 					<div className="md:w-1/2 bg-green-200">
 						<img
 							className="w-full h-full object-cover"
-							src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTc1fHx0ZWFtfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+							src="https://www.unicef.org/rosa/sites/unicef.org.rosa/files/styles/press_release_feature/public/UN0754222.webp?itok=DC_DMVgR"
 							alt=""
 						/>
 					</div>
