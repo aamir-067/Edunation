@@ -12,9 +12,8 @@ export const Donate = () => {
 							</h1>
 
 							<p className="mt-4 text-gray-500">
-								Lorem ipsum dolor sit amet consectetur
-								adipisicing elit. Et libero nulla eaque error
-								neque ipsa culpa autem, at itaque nostrum!
+								Your donation directly empowers children in need
+								through secure Ethereum blockchain transactions.
 							</p>
 						</div>
 

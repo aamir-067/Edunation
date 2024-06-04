@@ -11,25 +11,13 @@ export const AboutUs = () => {
 				<section className="md:flex mt-10 justify-between min-h-96">
 					<div className="md:w-1/2 p-4">
 						<p className="mb-4">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Eum illo, non quam velit corrupti quia quis.
-							Error officiis assumenda temporibus tempore modi, ea
-							ab eos pariatur unde eum deleniti blanditiis dolorum
-							animi voluptatum ut consectetur exercitationem dicta
-							neque esse soluta?
+							We are a team of passionate individuals driven to ensure every child has access to quality education. We believe education is the foundation for a brighter future, and no child should be denied the opportunity to learn and reach their full potential.
 						</p>
 						<p className="mb-4">
-							Lorem ipsum, dolor sit amet consectetur adipisicing
-							elit. Itaque similique saepe quas voluptatem
-							perferendis, dolore, alias reiciendis exercitationem
-							quam, ipsa velit iure. Atque placeat tempore quod
-							delectus architecto quo quasi ab esse sunt?
-							Doloribus, provident.
+							Our innovative platform leverages the power of Ethereum blockchain technology. This ensures secure, transparent donations. You can be confident that your contributions go directly towards supporting educational initiatives that empower children around the world.
 						</p>
 						<p>
-							Lorem ipsum dolor sit, amet consectetur adipisicing
-							elit. Nulla ipsa itaque dolore adipisci molestias
-							similique!
+							Donate today and be a part of something transformative. Together, we can unlock a world where every child has the chance to learn, grow, and achieve their dreams.
 						</p>
 					</div>
 					<div className="md:w-1/2 bg-green-200">
@@ -47,7 +35,7 @@ export const AboutUs = () => {
 							Get to Know Our Staff
 						</h2>
 						<p className="mx-auto mt-4 max-w-2xl text-xl text-gray-600">
-							Meet our Team, which helps kids educate which are not able to get a quality education from around the world
+							Meet our Team, which helps kids educate who are not able to get a quality education from around the world
 						</p>
 					</div>
 

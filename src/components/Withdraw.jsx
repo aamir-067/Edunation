@@ -8,12 +8,6 @@ export const Withdraw = () => {
 					<h1 className="text-2xl font-bold sm:text-3xl">
 						Withdraw Ethers
 					</h1>
-
-					<p className="mt-4 text-gray-500">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Et libero nulla eaque error neque ipsa culpa autem, at
-						itaque nostrum!
-					</p>
 				</div>
 
 				<form

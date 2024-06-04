@@ -31,8 +31,7 @@ export function Hero() {
                         Educating the next generation with quality education
                     </h1>
                     <p className="mt-8 max-w-3xl text-lg text-gray-700">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ipsam nulla aperiam quo
-                        possimus, nihil molestiae modi tenetur esse qui repudiandae cum fuga aspernatur ea?
+                        Education changes lives. Donate today and witness the power of blockchain for every child's potential.
                     </p>
                     <div className="mt-8">
                         <NavLink
