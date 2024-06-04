@@ -71,10 +71,17 @@ const Transactions = () => {
 								</tr>
 
 								<tr>
-									<td className=" bg-red-200 text-center text-lg font-bold">
+									<td className=""></td>
+									<td
+										colSpan={2}
+										className=" whitespace-nowrap text-center text-lg font-bold"
+									>
 										Total in charity
 									</td>
-									<td className="bg-green-200">1.2 eth</td>
+									<td className="hidden"></td>
+									<td className=" whitespace-nowrap text-lg font-bold">
+										1.2 eth
+									</td>
 								</tr>
 							</tbody>
 						</table>

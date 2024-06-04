@@ -1,6 +1,8 @@
 import { edunationAddress, rpcUrl } from "../CONSTANTS";
 import Edunation from "../artifacts/Edunation.json";
 import { ethers } from "ethers";
+import { store } from "../store/store";
+import { initWeb3 } from "../features/web3Api.reducer";
 export const connectWalletProvider = async () => {
     try {
         let provider;
@@ -19,6 +21,7 @@ export const connectWalletProvider = async () => {
             provider = new ethers.getDefaultProvider(rpcUrl);
         }
         const edunation = new ethers.Contract(edunationAddress, Edunation.abi, provider);
+        store.dispatch(initWeb3({ provider, contract: edunation, signer: null }));
         return { edunation, provider };
     } catch (e) {
         console.error(e);
@@ -39,7 +42,7 @@ export const connectWalletSigner = async () => {
             window.ethereum.on('accountsChanged', async () => {
                 await connectWalletSigner();
             });
-
+            store.dispatch(initWeb3({ provider, contract: edunation, signer }));
             return { signer, edunation };
         } else {
             // "metamask is not installed"
@@ -84,6 +87,9 @@ export const getOwner = async ({ contract }) => {
         return new Error("error while getting the owner of the contract");
     }
 }
+
+
+
 
 
 export const getRecentTransactions = async ({ contract }) => {
