@@ -52,6 +52,7 @@ const NavBar = () => {
                             <li key={item.name}>
                                 <NavLink
                                     to={item.href}
+                                    onClick={toggleMenu}
                                     className={({ isActive }) =>
                                         `${isActive ? "font-bold text-lg underline" : "text-sm"
                                         } font-semibold text-gray-800 hover:text-gray-900`
@@ -79,7 +80,7 @@ const NavBar = () => {
                         <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                             <div className="px-5 pb-6 pt-5">
                                 <div className="flex items-center justify-between">
-                                    <div className="inline-flex items-center space-x-2">
+                                    <NavLink to={""} onClick={toggleMenu} className="inline-flex items-center space-x-2">
                                         <span>
                                             <svg
                                                 width="30"
@@ -95,7 +96,7 @@ const NavBar = () => {
                                             </svg>
                                         </span>
                                         <span className="font-bold">EduNation</span>
-                                    </div>
+                                    </NavLink>
                                     <div className="-mr-2">
                                         <button
                                             type="button"
@@ -110,15 +111,16 @@ const NavBar = () => {
                                 <div className="mt-6">
                                     <nav className="grid gap-y-4">
                                         {menuItems.map((item) => (
-                                            <a
+                                            <NavLink
+                                                to={item.href}
+                                                onClick={toggleMenu}
                                                 key={item.name}
-                                                href={item.href}
                                                 className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
                                             >
                                                 <span className="ml-3 text-base font-medium text-gray-900">
                                                     {item.name}
                                                 </span>
-                                            </a>
+                                            </NavLink>
                                         ))}
                                     </nav>
                                 </div>
