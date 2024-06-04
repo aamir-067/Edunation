@@ -38,7 +38,7 @@ describe('Edunation', function () {
 
 
             // this means that this is a donation not a withdrawal.
-            expect(myTransaction[0]).to.equal(0n)
+            expect(myTransaction[0]).to.equal(0n);
             expect(myTransaction[1]).to.equal("this is testing donation");
             expect(myTransaction[2]).to.equal(ethers.parseEther("0.05"));
             expect(myTransaction[3]).to.equal(owner.address);  // since the donator is owner.
