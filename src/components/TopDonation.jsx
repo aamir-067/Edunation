@@ -2,8 +2,10 @@ import { ethers } from 'ethers'
 import React from 'react'
 import { useSelector } from 'react-redux'
 export const TopDonation = () => {
-    const topDonation = useSelector(state => state.general.topDonation);
+    const { topDonation } = useSelector(state => state.general);
 
+
+    console.log(topDonation);
     return (
         <div className="rounded-xl border-2 border-gray-100 bg-white">
             <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">

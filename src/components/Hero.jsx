@@ -1,28 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Transactions from './Transactions'
 import { NavLink } from 'react-router-dom'
-import { connectWalletProvider, getRecentTransactions, getTopDonation } from '../interactions/helpers';
-import { useDispatch, useSelector } from 'react-redux';
-import { initWeb3 } from '../features/web3Api.reducer';
+import { connectWalletProvider, getAvailableBalance, getRecentTransactions, getTopDonation } from '../interactions/helpers';
+import { store } from '../store/store';
 
 export function Hero() {
-    const contract = useSelector(state => state.web3Api.contract);
-    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        (async () => {
-            let response;
-            if (!contract) {
-                response = await connectWalletProvider();
-                console.log("provider init", response);
-                const res = await getRecentTransactions({ contract: response.contract });
-                console.log("res is ==> ", res);
-                dispatch(initWeb3(response));
+        setLoading(true);
+        const init = async () => {
+            let signer = store.getState().web3Api.signer;
+            if (!signer) {
+                await connectWalletProvider();
             }
-        })()
-    });
+            const res = await getTopDonation();
+            await getRecentTransactions();
+            await getAvailableBalance();
+            console.log(res);
+        }
+
+        init();
+        setLoading(false);
+    }, []);
+
+
 
     return (
-        <div className="relative w-full bg-white">
+        loading ? <h2>Loading</h2> : <div className="relative w-full bg-white">
             <div className="mx-auto max-w-7xl lg:px-8">
                 <div className="flex flex-col justify-center px-4 py-10 lg:px-6">
                     <div className="inline-flex items-center">

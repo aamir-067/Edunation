@@ -2,20 +2,10 @@ import React, { useEffect, useState } from "react";
 import TopDonation from "./TopDonation";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
-import { connectWalletProvider, getAvailableBalance, getRecentTransactions, getTopDonation } from "../interactions/helpers";
-import { store } from "../store/store";
 
 const Transactions = () => {
 
-	const { availBalance } = useSelector(state => state.general);
-	const [transactions, setTransactions] = useState(null);
-	useEffect(() => {
-		(async () => {
-			const response = await getRecentTransactions();
-			setTransactions(response);
-		})()
-	}, []);
-
+	const { availBalance, transactions } = useSelector(state => state.general);
 	return (
 		<div className="w-full">
 			<div className="max-w-7xl mx-auto min-h-screen">
@@ -56,7 +46,7 @@ const Transactions = () => {
 											return (
 												<tr key={index}>
 													<td className="whitespace-nowrap px-4 py-2 text-gray-900">
-														{trx[3]}
+														{`${[...trx[3]].slice(0, 5).join("")}...${[...trx[3]].slice(37, 42).join("")}`}
 													</td>
 													<td className="whitespace-nowrap px-4 py-2 text-gray-700">
 														{trx[1]}
@@ -74,23 +64,6 @@ const Transactions = () => {
 										}
 									})
 								}
-
-								<tr>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-900">
-										0x426969696969
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										All is well
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										<p className="bg-red-600 rounded-full text-sm px-2 text-white w-fit">
-											withdraw
-										</p>
-									</td>
-									<td className="whitespace-nowrap px-4 py-2 text-gray-700">
-										0.5 eth
-									</td>
-								</tr>
 
 								<tr>
 									<td className=""></td>

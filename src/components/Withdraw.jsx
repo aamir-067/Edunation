@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { getOwner } from "../interactions/helpers";
+import { useLoaderData } from "react-router-dom";
 
 export const Withdraw = () => {
 
@@ -8,6 +9,11 @@ export const Withdraw = () => {
 			await getOwner();
 		})()
 	}, [])
+
+
+	const loaderData = useLoaderData();
+
+	console.log(loaderData);
 
 	return (
 		<div className="min-h-screen flex justify-center">

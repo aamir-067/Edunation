@@ -77,7 +77,7 @@ export const Donate = () => {
 							</div>
 
 							<input
-								class="block w-full text-lg border cursor-pointer shadow-md focus:outline-none"
+								className="block w-full text-lg border cursor-pointer shadow-md focus:outline-none"
 								id="large_size"
 								type="file"
 							/>
