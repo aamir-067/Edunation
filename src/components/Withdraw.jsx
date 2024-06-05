@@ -9,11 +9,9 @@ export const Withdraw = () => {
 	const [details, setDetails] = useState({ amount: 0.0, massage: "" });
 
 	const signer = useSelector(state => state.web3Api.signer);
-	if (!signer || signer?.address !== ownerAddress) {
-		window.location.href = '/donate';
-	}
-
-
+	// if (!signer || signer?.address !== ownerAddress) {
+	// 	window.location.href = '/donate';
+	// }
 	const handleInputs = (e) => {
 		setDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 	}
@@ -23,11 +21,12 @@ export const Withdraw = () => {
 
 		const response = await withdrawEth({
 			...details
-		})
-		if (response) {
-			console.log('withdrawn successfully');
-			window.location.href = '/donate';
-		}
+		});
+
+		// if (response) {
+		// 	console.log('withdrawn successfully');
+		// 	window.location.href = '/donate';
+		// }
 	}
 	return (
 		<div className="min-h-screen flex justify-center">

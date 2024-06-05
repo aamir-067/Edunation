@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "bunx hardhat test",
-		"deploy": "bunx hardhat run scripts/edunation.js --network sepolia "
+		"compile": "bunx hardhat compile",
+		"deploy": "bunx hardhat run scripts/edunation.js --network sepolia"
 	},
 	"keywords": [],
 	"author": "",

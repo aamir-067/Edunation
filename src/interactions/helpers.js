@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import { store } from "../store/store";
 import { initWeb3 } from "../features/web3Api.reducer";
 import { setRecords } from "../features/general.reducer";
+import toast from "react-hot-toast";
 export const connectWalletProvider = async () => {
     try {
         let provider;
@@ -23,6 +24,12 @@ export const connectWalletProvider = async () => {
             provider = new ethers.getDefaultProvider(rpcUrl);
         }
         const edunation = new ethers.Contract(edunationAddress, abi, provider);
+
+        edunation.on("newTransection", (performer, transactionType, _amount) => {
+            const trxType = ethers.toNumber(transactionType) == 0 ? "donation" : "withdrawal";
+            const amount = ethers.formatEther(_amount);
+            toast(`new ${trxType} of ${amount} eth`);
+        })
         store.dispatch(initWeb3({ provider, contract: edunation, signer: null }));
         return { provider, contract: edunation, signer: null };
     } catch (e) {
@@ -37,6 +44,11 @@ export const connectWalletSigner = async () => {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
             const edunation = new ethers.Contract(edunationAddress, abi, signer);
+            edunation.on("newTransection", (performer, transactionType, _amount) => {
+                const trxType = ethers.toNumber(transactionType) == 0 ? "donation" : "withdrawal";
+                const amount = ethers.formatEther(_amount);
+                toast(`new ${trxType} of ${amount} eth`);
+            })
             // listen to wallet events
             window.ethereum.on('chainChanged', async () => {
                 await connectWalletSigner();

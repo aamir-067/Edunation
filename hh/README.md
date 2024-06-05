@@ -1,13 +1,66 @@
 # Sample Hardhat Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+This hardhat project contains the smart contract, test cases of smart contract and deployment scripts.
 
-Try running some of the following tasks:
+# Getting Stated With Project
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
+     Note: I am using bun as a javaScript runtime and the instructions given are for bun. please follow the following commands if you are using node
+
+1.  goto `package.json `
+2.  change the scripts as given.
+
+```json
+    "scripts" : {
+		"test": "npx hardhat test",
+        "compile": "bunx hardhat compile",
+		"deploy": "npx hardhat run scripts/edunation.js --network sepolia"
+	}
 ```
+
+## 1. Compiling a smart contract.
+
+To compile a smart contract run the following command.
+
+```bash
+bun run compile
+```
+
+for npm
+
+```bash
+npm run compile
+```
+
+## 2. Testing a smart contract.
+
+For testing a smart contract run the following command.
+
+```bash
+bun run test
+```
+
+for npm
+
+```bash
+npm run test
+```
+
+## 1. Deploying a smart contract.
+
+To deploy the smart contract use the following instructions.
+
+-   add account private key and rpc node url in `hardhat.config.js`
+
+-   then run the given command
+
+```bash
+bun run deploy
+```
+
+for npm
+
+```bash
+npm run deploy
+```
+
+    Note: The contract will automatically deploy to sepolia testnet. to change the default behavior edit the package.json file

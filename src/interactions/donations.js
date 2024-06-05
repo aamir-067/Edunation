@@ -1,10 +1,11 @@
 import { ethers } from "ethers";
 import { getTopDonation } from "./helpers";
 import { store } from "../store/store";
-
+import { toast } from "react-hot-toast";
 export const donateEth = async ({ name, img, amount, massage }) => {
     try {
         if (amount < 0.01) {
+            toast.error("Please enter greater amount");
             return new Error("donation must be greater or equal to 0.01 eth");
         }
 
@@ -20,8 +21,6 @@ export const donateEth = async ({ name, img, amount, massage }) => {
             // upload the image if available to cloudinary.
         }
 
-
-        console.log({ name, img, amount, massage });
         const res = await contract.donate(
             name.trim().length > 0 ? name.trim() : "",
             imageLink,
@@ -29,14 +28,13 @@ export const donateEth = async ({ name, img, amount, massage }) => {
             { value: ethers.parseEther(amount + "") }
         );
 
-
-        console.log("response of donation : ", res);
-
         // success
+        toast.success("donation successful");
         return true;
 
     } catch (error) {
         console.error('error while donating ethers', error);
+        toast.error("Donation failed");
         return false;
     }
 }
