@@ -13,10 +13,9 @@ export function Hero() {
             if (!signer) {
                 await connectWalletProvider();
             }
-            const res = await getTopDonation();
+            await getTopDonation();
             await getRecentTransactions();
             await getAvailableBalance();
-            console.log(res);
         }
 
         init();

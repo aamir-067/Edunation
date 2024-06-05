@@ -86,7 +86,6 @@ export const getAvailableBalance = async () => {
         }
         const currentBalance = await web3Api.contract.availableBalance();
         const availBalance = ethers.formatEther(currentBalance);
-        console.log("available balance in wei", availBalance);
         const recentRecord = store.getState().general;
         store.dispatch(setRecords({ ...recentRecord, availBalance }));
         return availBalance;
@@ -97,9 +96,15 @@ export const getAvailableBalance = async () => {
     }
 }
 
-export const getOwner = async ({ contract }) => {
+export const getOwner = async () => {
     try {
-        const ownerAddress = await response.contract.owner();
+        const web3Api = store.getState().web3Api;
+        if (!web3Api.contract) {
+            console.log("error while getting available balance. please refresh the page.");
+            await connectWalletProvider();
+        }
+
+        const ownerAddress = await web3Api.contract.owner();
         const recentRecord = store.getState().general;
         store.dispatch(setRecords({ ...recentRecord, ownerAddress }));
         return ownerAddress;
