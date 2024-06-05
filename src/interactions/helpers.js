@@ -11,10 +11,10 @@ export const connectWalletProvider = async () => {
             provider = new ethers.BrowserProvider(window.ethereum);
             // listen to wallet events
             window.ethereum.on('chainChanged', async () => {
-                await connectWalletSigner();
+                await connectWalletProvider();
             });
             window.ethereum.on('accountsChanged', async () => {
-                await connectWalletSigner();
+                await connectWalletProvider();
             });
         } else {
             // "metamask is not installed"
@@ -22,9 +22,7 @@ export const connectWalletProvider = async () => {
             provider = new ethers.getDefaultProvider(rpcUrl);
         }
         const edunation = new ethers.Contract(edunationAddress, Edunation.abi, provider);
-        store.dispatch(initWeb3({ provider, contract: edunation, signer: null }));
-        console.log(store.getState().web3Api);
-        return true;
+        return { provider, contract: edunation, signer: null };
     } catch (e) {
         console.error(e);
         return "something went wrong while connecting to metamask";
@@ -45,7 +43,6 @@ export const connectWalletSigner = async () => {
                 await connectWalletSigner();
             });
             store.dispatch(initWeb3({ provider, contract: edunation, signer }));
-            console.log(store.getState().web3Api.signer.address);
             return true;
         } else {
             // "metamask is not installed"
@@ -59,15 +56,15 @@ export const connectWalletSigner = async () => {
 
 export const getTopDonation = async () => {
     try {
-        const { contract } = store.getState().web3Api;
+        const { web3Api: { contract }, general } = store.getState();
         if (!contract) {
             console.log("error while getting topDonation. please refresh the page.");
             return false;
         }
+
         const topDonation = await contract.topDonor();
 
-        const recentRecord = store.getState().general;
-        store.dispatch(setRecords({ ...recentRecord, topDonation }));
+        store.dispatch(setRecords({ ...general, topDonation }));
         return true;
 
     } catch (error) {
@@ -81,12 +78,14 @@ export const getAvailableBalance = async () => {
         const { contract } = store.getState().web3Api;
         if (!contract) {
             console.log("error while getting availableBalance. please refresh the page.");
-            return false;
+            await connectWalletProvider();
         }
         const currentBalance = await contract.availableBalance();
         const availBalance = ethers.formatEther(currentBalance);
+        console.log("available balance in wei", availBalance);
+        const recentRecord = store.getState().general;
         store.dispatch(setRecords({ ...recentRecord, availBalance }));
-        return true;
+        return availBalance;
 
     } catch (error) {
         console.error("error while getting the current available balance of the contract.", error);
@@ -102,8 +101,9 @@ export const getOwner = async () => {
             return false;
         }
         const ownerAddress = await contract.owner();
+        const recentRecord = store.getState().general;
         store.dispatch(setRecords({ ...recentRecord, ownerAddress }));
-        return true;
+        return ownerAddress;
     } catch (error) {
         console.error("error while getting the owner of the contract.", error);
         return new Error("error while getting the owner of the contract");
@@ -116,7 +116,10 @@ export const getOwner = async () => {
 
 export const getRecentTransactions = async ({ contract }) => {
     try {
+
         const transactions = await contract.recentTransactions();
+        const recentRecord = store.getState().general;
+        store.dispatch(setRecords({ ...recentRecord, transactions }));
         return transactions;
     } catch (error) {
         console.error("something went wrong while getting recent transactions", error);

@@ -1,17 +1,26 @@
 import React, { useEffect } from 'react'
 import Transactions from './Transactions'
 import { NavLink } from 'react-router-dom'
-import { getAvailableBalance, getRecentTransactions, getTopDonation } from '../interactions/helpers'
-export function Hero() {
+import { connectWalletProvider, getRecentTransactions, getTopDonation } from '../interactions/helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { initWeb3 } from '../features/web3Api.reducer';
 
+export function Hero() {
+    const contract = useSelector(state => state.web3Api.contract);
+    const dispatch = useDispatch();
     useEffect(() => {
         (async () => {
-            await getTopDonation();
-            await getAvailableBalance();
-            await getRecentTransactions();
-        })();
+            let response;
+            if (!contract) {
+                response = await connectWalletProvider();
+                console.log("provider init", response);
+                const res = await getRecentTransactions({ contract: response.contract });
+                console.log("res is ==> ", res);
+                dispatch(initWeb3(response));
+            }
+        })()
+    });
 
-    }, []);
     return (
         <div className="relative w-full bg-white">
             <div className="mx-auto max-w-7xl lg:px-8">

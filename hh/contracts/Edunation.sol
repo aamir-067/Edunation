@@ -106,6 +106,4 @@ contract Edunation {
             transections[trxCount] = tempTransection;
         }
     }
-
-
 }

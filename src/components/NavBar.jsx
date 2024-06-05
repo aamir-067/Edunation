@@ -28,7 +28,7 @@ const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
     // const { signer } = store.getState().web3Api;
 
-    const { signer } = useSelector(state => state).web3Api;
+    const signer = useSelector(state => state.web3Api.signer);
 
 
     const connectWallet = async () => {

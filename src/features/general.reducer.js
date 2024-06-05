@@ -16,6 +16,7 @@ const generalReducer = createSlice({
             state.transactions = action.payload.transactions;
             state.availBalance = action.payload.availBalance;
             state.ownerAddress = action.payload.ownerAddress;
+            console.log("state changed", state);
         }
     }
 })

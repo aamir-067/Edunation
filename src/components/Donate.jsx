@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import { donateEth } from "../interactions/donations";
+import { getRecentTransactions } from "../interactions/helpers";
 
 export const Donate = () => {
+	const [details, setDetails] = useState({
+		name: "",
+		amount: 0,
+		massage: "",
+		img: null
+	});
+
+
+	const handleChange = (e) => {
+		const newObject = {
+			...details,
+			[e.target.name]: e.target.value
+		}
+		setDetails(newObject)
+	}
+
+	const handleSubmit = async (e = undefined) => {
+		e?.preventDefault();
+		const response = await donateEth({
+			...details
+		})
+
+		if (response) {
+			console.log('donated successfully');
+			await getRecentTransactions();
+		}
+	}
+
 	return (
 		<div className="relative w-full bg-white">
 			<div className="mx-auto max-w-7xl lg:px-8">
@@ -18,13 +48,15 @@ export const Donate = () => {
 						</div>
 
 						<form
-							action="#"
+							onSubmit={(e) => handleSubmit(e)}
 							className="mx-auto mb-0 mt-8 max-w-md space-y-4"
 						>
 							<div>
 								<div className="relative">
 									<input
+										onChange={(e) => handleChange(e)}
 										type="text"
+										name="name"
 										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
 										placeholder="Your Name*"
 									/>
@@ -35,6 +67,8 @@ export const Donate = () => {
 								<div className="relative">
 									<input
 										type="number"
+										onChange={(e) => handleChange(e)}
+										name="amount"
 										step={0.01}
 										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md"
 										placeholder="Donation amount*"
@@ -52,6 +86,8 @@ export const Donate = () => {
 								<div className="relative">
 									<textarea
 										id="OrderNotes"
+										name="massage"
+										onChange={(e) => handleChange(e)}
 										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md resize-none border-none align-top focus:ring-0 sm:text-sm"
 										rows="4"
 										placeholder="Your massage..."
@@ -62,6 +98,7 @@ export const Donate = () => {
 
 							<button
 								type="button"
+								onClick={handleSubmit}
 								className="rounded-md bg-black px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
 							>
 								{"Donate"}
