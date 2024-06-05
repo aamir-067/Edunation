@@ -13,18 +13,18 @@ export const TopDonation = () => {
                 >
                     <img
                         alt=""
-                        src={topDonation && topDonation[3] !== "" ? topDonation[3] : "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"}
+                        src={topDonation && topDonation[3] !== "" ? topDonation[3] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpUJhFwB85GyHaxths8hBLh6L9kSmttcgOQ&usqp=CAU"}
                         className="size-14 rounded-lg object-cover"
                     />
                 </a>
 
-                <div>
+                <div className='p-2'>
                     <h3 className="line-clamp-2 whitespace-nowrap text-sm text-gray-700">
                         <span className='font-medium sm:text-lg w-fit'>Name</span> : {topDonation && topDonation[0] ? topDonation[0] : "Unknown"}
                     </h3>
 
                     <p className="line-clamp-2 whitespace-nowrap text-sm text-gray-700">
-                        <span className='font-medium sm:text-lg w-fit'>Account</span> : {topDonation && topDonation[1] ? topDonation[1] : "UnKnown"}
+                        <span className='font-medium sm:text-lg w-fit'>Account</span> : {topDonation && topDonation[1] ? `${[...topDonation[1]].slice(0, 8).join("")}...${[...topDonation[1]].slice(30, 42).join("")}` : "UnKnown"}
                     </p>
 
                     <div className="mt-2 sm:flex sm:items-center sm:gap-2">

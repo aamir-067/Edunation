@@ -28,7 +28,7 @@ export const connectWalletProvider = async () => {
         edunation.on("newTransection", (performer, transactionType, _amount) => {
             const trxType = ethers.toNumber(transactionType) == 0 ? "donation" : "withdrawal";
             const amount = ethers.formatEther(_amount);
-            toast(`new ${trxType} of ${amount} eth`);
+            toast(`new ${trxType} of ${amount} eth`, { id: performer });
         })
         store.dispatch(initWeb3({ provider, contract: edunation, signer: null }));
         return { provider, contract: edunation, signer: null };
@@ -47,7 +47,7 @@ export const connectWalletSigner = async () => {
             edunation.on("newTransection", (performer, transactionType, _amount) => {
                 const trxType = ethers.toNumber(transactionType) == 0 ? "donation" : "withdrawal";
                 const amount = ethers.formatEther(_amount);
-                toast(`new ${trxType} of ${amount} eth`);
+                toast(`new ${trxType} of ${amount} eth`, { id: performer });
             })
             // listen to wallet events
             window.ethereum.on('chainChanged', async () => {

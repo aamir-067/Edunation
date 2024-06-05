@@ -10,6 +10,20 @@ export const Donate = () => {
 		img: null
 	});
 
+	const handleImageChange = (event) => {
+		const file = event.target.files[0];
+		if (file && file.type.startsWith('image/')) {
+			setDetails(prev => {
+				return { ...prev, img: URL.createObjectURL(file) }
+			}); // Create a temporary URL for preview
+
+			console.log("image url is ", URL.createObjectURL(file));
+		} else {
+			setDetails(prev => { return { ...prev, img: null } }); // Clear preview if invalid file
+			console.error('Invalid file type. Please select an image.');
+		}
+	};
+
 
 	const handleChange = (e) => {
 		const newObject = {
@@ -77,6 +91,8 @@ export const Donate = () => {
 							</div>
 
 							<input
+								onChange={handleImageChange}
+								accept="image/*"
 								className="block w-full text-lg border cursor-pointer shadow-md focus:outline-none"
 								id="large_size"
 								type="file"
@@ -109,7 +125,7 @@ export const Donate = () => {
 					<div className="relative h-64 w-11/12 mx-auto md:h-96 lg:h-full lg:w-1/2">
 						<img
 							alt=""
-							src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+							src={"https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"}
 							className="absolute inset-0 h-full w-full object-cover"
 						/>
 					</div>
