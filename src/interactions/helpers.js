@@ -73,7 +73,7 @@ export const getTopDonation = async () => {
     try {
         const web3Api = store.getState().web3Api;
         if (!web3Api.contract) {
-            console.log("error while getting topDonation. please refresh the page.");
+            // console.log("error while getting topDonation. please refresh the page.");
             await connectWalletProvider();
         }
 
@@ -93,7 +93,7 @@ export const getAvailableBalance = async () => {
     try {
         const web3Api = store.getState().web3Api;
         if (!web3Api.contract) {
-            console.log("error while getting available balance. please refresh the page.");
+            // console.log("error while getting available balance. please refresh the page.");
             await connectWalletProvider();
         }
         const currentBalance = await web3Api.contract.availableBalance();
@@ -112,7 +112,7 @@ export const getOwner = async () => {
     try {
         const web3Api = store.getState().web3Api;
         if (!web3Api.contract) {
-            console.log("error while getting available balance. please refresh the page.");
+            // console.log("error while getting available balance. please refresh the page.");
             await connectWalletProvider();
         }
 

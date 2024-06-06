@@ -6,7 +6,7 @@ import { withdrawEth } from "../interactions/withdrawls";
 export const Withdraw = () => {
 	const ownerAddress = useLoaderData();
 
-	const [details, setDetails] = useState({ amount: 0.0, massage: "" });
+	const [details, setDetails] = useState({ amount: 0.0, message: "" });
 
 	const signer = useSelector(state => state.web3Api.signer);
 	// if (!signer || signer?.address !== ownerAddress) {
@@ -22,11 +22,6 @@ export const Withdraw = () => {
 		const response = await withdrawEth({
 			...details
 		});
-
-		// if (response) {
-		// 	console.log('withdrawn successfully');
-		// 	window.location.href = '/donate';
-		// }
 	}
 	return (
 		<div className="min-h-screen flex justify-center">
@@ -55,7 +50,7 @@ export const Withdraw = () => {
 					<div className="relative">
 						<textarea
 							id="OrderNotes"
-							name="massage"
+							name="message"
 							onChange={(e) => handleInputs(e)}
 							className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md resize-none border-none align-top focus:ring-0 sm:text-sm"
 							rows="4"

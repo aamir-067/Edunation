@@ -29,8 +29,6 @@ export const donateEth = async ({ name, img, amount, massage }) => {
         }
 
 
-        console.log('ipfs hash', imageLink);
-
         await contract.donate(
             name.trim().length > 0 ? name.trim() : "",
             imageLink,
@@ -43,7 +41,6 @@ export const donateEth = async ({ name, img, amount, massage }) => {
         return true;
 
     } catch (error) {
-        console.error('error while donating ethers', error);
         toast.error("Donation failed");
         return false;
     }

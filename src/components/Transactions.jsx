@@ -28,7 +28,7 @@ const Transactions = () => {
 										Address
 									</th>
 									<th className="whitespace-nowrap px-4 py-2 font-medium text-black">
-										Massage
+										Message
 									</th>
 									<th className="whitespace-nowrap px-4 py-2 font-medium text-black">
 										Type

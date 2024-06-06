@@ -9,7 +9,7 @@ contract Edunation {
 
     struct Trx {
             trxType transectionType;
-            string massage;
+            string message;
             uint72 amount;
             address performer;
     }
@@ -33,7 +33,7 @@ contract Edunation {
     }
 
 
-    function donate(string memory _name, string memory _img, string memory _massage) public payable {
+    function donate(string memory _name, string memory _img, string memory _message) public payable {
         // check if the amount is greater then the top donation
 
         require(msg.value >= 0.01 ether, "minimum amount to donate is 0.01 eth");
@@ -45,7 +45,7 @@ contract Edunation {
         }
 
         // make a transection and save it.
-        addNewTransection(trxType.DEPOSIT, _massage, uint72(msg.value),msg.sender);
+        addNewTransection(trxType.DEPOSIT, _message, uint72(msg.value),msg.sender);
 
         // increment the trxCount.
         trxCount = trxCount < 10 ? trxCount + 1 : trxCount;
@@ -60,10 +60,10 @@ contract Edunation {
         _;
     }
 
-    function withdraw(uint _amount, string memory _massage) public _onlyOwner {
+    function withdraw(uint _amount, string memory _message) public _onlyOwner {
         require(_amount <= availableBalance(), "not enough balance to withdraw");
         // make a transection
-        addNewTransection(trxType.WITHDRAW, _massage, uint72(_amount) ,msg.sender);
+        addNewTransection(trxType.WITHDRAW, _message, uint72(_amount) ,msg.sender);
 
 
         // increment the trxCount.
@@ -89,8 +89,8 @@ contract Edunation {
 
 
 
-    function addNewTransection(trxType _type, string memory _massage, uint72  _amount, address _performer) internal {
-        Trx memory tempTransection = Trx(_type, _massage, uint72(_amount),_performer);
+    function addNewTransection(trxType _type, string memory _message, uint72  _amount, address _performer) internal {
+        Trx memory tempTransection = Trx(_type, _message, uint72(_amount),_performer);
 
 
         // remove one old transection if the length of the transections array is equals to 10

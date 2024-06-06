@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { donateEth } from "../interactions/donations";
 import { getRecentTransactions } from "../interactions/helpers";
+import toast from "react-hot-toast";
 
 export const Donate = () => {
 	const [details, setDetails] = useState({
 		name: "",
 		amount: 0,
-		massage: "",
+		message: "",
 		img: null
 	});
 
@@ -19,7 +20,8 @@ export const Donate = () => {
 
 		} else {
 			setDetails(prev => { return { ...prev, img: null } }); // Clear preview if invalid file
-			console.error('Invalid file type. Please select an image.');
+			toast.error("Invalid file type");
+			return;
 		}
 	};
 
@@ -39,7 +41,6 @@ export const Donate = () => {
 		})
 
 		if (response) {
-			console.log('donated successfully');
 			await getRecentTransactions();
 		}
 	}
@@ -101,11 +102,11 @@ export const Donate = () => {
 								<div className="relative">
 									<textarea
 										id="OrderNotes"
-										name="massage"
+										name="message"
 										onChange={(e) => handleChange(e)}
 										className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md resize-none border-none align-top focus:ring-0 sm:text-sm"
 										rows="4"
-										placeholder="Your massage..."
+										placeholder="Your message..."
 									></textarea>
 								</div>
 							</div>

@@ -25,6 +25,7 @@ export const uploadByPinata = async (file, prevImg = null) => {
                 body: formData,
             }
         );
+
         const resData = await res.json();
         return resData.IpfsHash;
     } catch (error) {
