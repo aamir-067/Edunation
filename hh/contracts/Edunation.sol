@@ -96,7 +96,7 @@ contract Edunation {
         // remove one old transection if the length of the transections array is equals to 10
         if(trxCount == 10){
             for(uint8 i = 1; i < 10; i++){
-                transections[i] = transections[i-1]; // shift all items to the left
+                transections[i-1] = transections[i]; // shift all items to the left
             }
             // now add the new transection at the last index
             transections[9] = tempTransection; // add the new item
