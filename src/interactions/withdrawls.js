@@ -1,13 +1,13 @@
 import { store } from "../store/store";
 import { ethers } from "ethers";
 import toast, { } from "react-hot-toast";
-export const withdrawEth = async ({ amount, massage }) => {
+export const withdrawEth = async ({ amount, message }) => {
     try {
 
 
-        if (massage.trim().length <= 0) {
+        if (message.trim().length <= 0) {
             toast.error("Please enter a valid message");
-            console.error("You have to provide a massage which show that for what purpose you want to withdraw");
+            console.error("You have to provide a message which show that for what purpose you want to withdraw");
             return;
         }
 
@@ -28,7 +28,7 @@ export const withdrawEth = async ({ amount, massage }) => {
             return new Error("not enough ethers are available to withdraw");
         }
 
-        await web3Api.contract.withdraw(ethers.parseEther(amount), massage);
+        await web3Api.contract.withdraw(ethers.parseEther(amount), message);
 
         toast.success("successfully done withdrawal");
         // success

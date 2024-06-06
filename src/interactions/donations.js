@@ -3,7 +3,7 @@ import { getTopDonation } from "./helpers";
 import { store } from "../store/store";
 import { toast } from "react-hot-toast";
 import { uploadByPinata } from "../utils/pinata";
-export const donateEth = async ({ name, img, amount, massage }) => {
+export const donateEth = async ({ name, img, amount, message }) => {
     try {
         if (amount < 0.01) {
             toast.error("Please enter greater amount");
@@ -32,7 +32,7 @@ export const donateEth = async ({ name, img, amount, massage }) => {
         await contract.donate(
             name.trim().length > 0 ? name.trim() : "",
             imageLink,
-            massage.trim().length > 0 ? massage.trim() : "",
+            message.trim().length > 0 ? message.trim() : "",
             { value: ethers.parseEther(amount + "") }
         );
 
@@ -41,6 +41,7 @@ export const donateEth = async ({ name, img, amount, massage }) => {
         return true;
 
     } catch (error) {
+        console.log(error);
         toast.error("Donation failed");
         return false;
     }
