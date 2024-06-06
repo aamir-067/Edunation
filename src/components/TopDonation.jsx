@@ -13,7 +13,7 @@ export const TopDonation = () => {
                 >
                     <img
                         alt=""
-                        src={topDonation && topDonation[3] !== "" ? topDonation[3] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpUJhFwB85GyHaxths8hBLh6L9kSmttcgOQ&usqp=CAU"}
+                        src={topDonation && topDonation[3] !== "" ? `https://gateway.pinata.cloud/ipfs/${topDonation[3]}` : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpUJhFwB85GyHaxths8hBLh6L9kSmttcgOQ&usqp=CAU"}
                         className="size-14 rounded-lg object-cover"
                     />
                 </a>

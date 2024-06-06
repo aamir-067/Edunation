@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { getTopDonation } from "./helpers";
 import { store } from "../store/store";
 import { toast } from "react-hot-toast";
+import { uploadByPinata } from "../utils/pinata";
 export const donateEth = async ({ name, img, amount, massage }) => {
     try {
         if (amount < 0.01) {
@@ -16,12 +17,21 @@ export const donateEth = async ({ name, img, amount, massage }) => {
 
         await getTopDonation({ contract });
         const { topDonation } = store.getState().general;
+
         if (+ethers.formatEther(topDonation[2]) < amount) {
             // it will be a top donation of all time.
             // upload the image if available to cloudinary.
+
+            if (img) {
+                const res = await uploadByPinata(img, topDonation[3].length && topDonation[3]);
+                imageLink = res
+            }
         }
 
-        const res = await contract.donate(
+
+        console.log('ipfs hash', imageLink);
+
+        await contract.donate(
             name.trim().length > 0 ? name.trim() : "",
             imageLink,
             massage.trim().length > 0 ? massage.trim() : "",

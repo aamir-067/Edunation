@@ -14,10 +14,9 @@ export const Donate = () => {
 		const file = event.target.files[0];
 		if (file && file.type.startsWith('image/')) {
 			setDetails(prev => {
-				return { ...prev, img: URL.createObjectURL(file) }
+				return { ...prev, img: file }
 			}); // Create a temporary URL for preview
 
-			console.log("image url is ", URL.createObjectURL(file));
 		} else {
 			setDetails(prev => { return { ...prev, img: null } }); // Clear preview if invalid file
 			console.error('Invalid file type. Please select an image.');
