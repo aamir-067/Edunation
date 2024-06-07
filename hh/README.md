@@ -31,6 +31,8 @@ for npm
 npm run compile
 ```
 
+`Note:` if you did changes in the contract then after compiling copy Edunation.json file generated in `./artifacts/contracts/Edunation.sol` and copy it to the `../src/artifacts` directory.
+
 ## 2. Testing a smart contract.
 
 For testing a smart contract run the following command.
@@ -63,4 +65,8 @@ for npm
 npm run deploy
 ```
 
-    Note: The contract will automatically deploy to sepolia testnet. to change the default behavior edit the package.json file
+### `Note:`
+
+-   The contract will automatically deploy to sepolia testnet. to change the default behavior edit the package.json file
+
+-   after deploying the contract change the wallet address printed in console in `../src/CONSTANTS.js`
